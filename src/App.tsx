@@ -1,16 +1,12 @@
-import React from "react";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-import Home from "./components/Home";
-import NewPost from "./components/News/NewPost";
+import AppRouter from "./Routers/AppRouter";
+import { Provider } from "react-redux";
+import { store } from "./store/store";
 
 const App = () => {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/news/:id" element={<NewPost />} />
-        <Route path="/" element={<Home />} />
-      </Routes>
-    </BrowserRouter>
+    <Provider store={store}>
+      <AppRouter />
+    </Provider>
   );
 };
 
