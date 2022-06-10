@@ -20,7 +20,7 @@ export const getAllNews = (source: String) => {
       const filteredNews = await news.filter(({ author, story_title, story_url, created_at }) =>
          (author !== null && story_title !== null && story_url !== null && created_at !== null));
       const newsFormated = await filteredNews.map((item: New) => ({ ...item, isFave: isFaves(item.objectID, getState) }));
-      dispatch(setAllNews(news))
+      dispatch(setAllNews(newsFormated))
    }
 }
 

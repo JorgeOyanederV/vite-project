@@ -9,11 +9,11 @@ const SelectNews: FC<SelectNewsProps> = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const active = localStorage.getItem("active");
+    const _active = localStorage.getItem("active");
 
-    if (!!active) {
-      setActive(active);
-      dispatch(setActiveNews(active));
+    if (!!_active) {
+      setActive(_active);
+      dispatch(setActiveNews(_active));
     }
   }, []);
 
