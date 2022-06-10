@@ -7,6 +7,7 @@ interface NewsProps {}
 
 // component that render a selector and list of news with pagination
 export const News: FC<NewsProps> = () => {
+  
   return (
     <div className="px-[150px]">
       {/* All or fives Selector */}

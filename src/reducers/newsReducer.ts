@@ -27,6 +27,16 @@ export const newsReducer = (state = initialState, action: any) => {
         ...state,
         sourceNews: action.payload
       }
+    case types.addNewFave:
+      return {
+        ...state,
+        faves: [action.payload, ...state.faves]
+      }
+    case types.removeNewFave:
+      return {
+        ...state,
+        faves: action.payload
+      }
     default:
       return state;
   }

@@ -5,9 +5,7 @@ import NewsPagination from "./NewsPagination";
 interface NewsListProps {}
 
 const NewsList: FC<NewsListProps> = () => {
-  const { news, faves, selectedNews, sourceNews } = useSelector(
-    (state) => state.news
-  );
+  const { news, faves, selectedNews } = useSelector((state) => state.news);
   const [activeNews, setActiveNews] = useState([]);
 
   useEffect(() => {
@@ -25,8 +23,8 @@ const NewsList: FC<NewsListProps> = () => {
   return (
     <div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-10 gap-y-[30px]">
-        {activeNews.map((newPost) => {
-          return <New />;
+        {activeNews.map((activeNew) => {
+          return <New _new={activeNew} />;
         })}
       </div>
 
