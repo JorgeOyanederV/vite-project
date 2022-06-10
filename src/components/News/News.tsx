@@ -1,4 +1,5 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import NewsList from "./NewsList";
 import SelectNews from "./SelectNews";
 import SelectSourceNews from "./SelectSourceNews";

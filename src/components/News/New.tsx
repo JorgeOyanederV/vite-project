@@ -5,7 +5,7 @@ interface NewProps {}
 // the rectangle element in the list of the news
 export const New: FC<NewProps> = () => {
   return (
-    <div className="w-full h-[90px] pl-[26px] flex border border-[#979797] rounded-[6px] ">
+    <div className="w-full md:h-[90px] pl-[26px] flex border border-[#979797] rounded-[6px] ">
       {/* When click on this redirect to the main new post */}
       <div className="flex-1 flex flex-col justify-center">
         <div className="flex flex-row gap-[8px] items-start">
