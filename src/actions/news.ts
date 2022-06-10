@@ -4,22 +4,22 @@ interface New {
    author: String,
    story_title: String,
    story_url: String,
-   created_at: String
+   created_at: String,
+   objectID: number
 }
-
 interface NewFave extends New {
-   fave: boolean
+   isFave: boolean
 }
 
 export const getAllNews = (source: String) => {
    return async (dispatch, getState) => {
       // accion asincrona con para pedir las noticas
       const URL = `https://hn.algolia.com/api/v1/search_by_date?query=${source}&page=0`
-      const { hits } = await fetch(URL)
-         .then(response => response.json());
-      const filteredNews = await hits.filter(({ author, story_title, story_url, created_at }) =>
+      const { hits: news } = await fetch(URL)
+         .then(res => res.json());
+      const filteredNews = await news.filter(({ author, story_title, story_url, created_at }) =>
          (author !== null && story_title !== null && story_url !== null && created_at !== null));
-      const news = filteredNews.map((item: New) => ({ ...item, isFave: isFaves(item.story_url, getState) }));
+      const newsFormated = await filteredNews.map((item: New) => ({ ...item, isFave: isFaves(item.objectID, getState) }));
       dispatch(setAllNews(news))
    }
 }
@@ -45,17 +45,17 @@ export const addNewFave = (_new: New) => {
       }
    }
 }
-export const removeNewFave = (_new: NewFave) => {
-   return (dispatch, getState) => {
-      const filtered = getState().news.faves.filter(
-         (fave: NewFave) => fave.story_url !== _new.story_url
+
+export const removeNewFave = (objectID: number) => {
+   return async (dispatch, getState) => {
+      const filtered = await getState().news.faves.filter(
+         (fave: NewFave) => fave.objectID !== objectID
       )
-      console.log(filtered);
       dispatch(removeFave(filtered));
    }
 }
 
-const addFave = (_new: New) => {
+const addFave = (_new: NewFave) => {
    const newFave = {
       ..._new,
       isFave: true
@@ -81,11 +81,11 @@ const setAllNews = (news: New[]) => {
    }
 }
 
-const isFaves = (story_url: String, getState) => {
+const isFaves = (objectID: number, getState) => {
    const { faves } = getState().news;
    let isFave = false;
    faves.forEach((fave: New) => {
-      if (fave.story_url === story_url) {
+      if (fave.objectID === objectID) {
          isFave = true;
          return;
       }

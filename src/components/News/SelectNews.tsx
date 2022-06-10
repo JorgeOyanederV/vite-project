@@ -11,8 +11,7 @@ const SelectNews: FC<SelectNewsProps> = () => {
   useEffect(() => {
     const active = localStorage.getItem("active");
 
-    if (active) {
-      localStorage.setItem("active", active);
+    if (!!active) {
       setActive(active);
       dispatch(setActiveNews(active));
     }

@@ -11,8 +11,9 @@ const NewsList: FC<NewsListProps> = () => {
   useEffect(() => {
     if (selectedNews === "faves") {
       setActiveNews(faves);
-    } else {
-      setActiveNews(news);
+    }
+    if (selectedNews === "all") {
+      setActiveNews([]);
     }
   }, [selectedNews]);
 
@@ -24,7 +25,7 @@ const NewsList: FC<NewsListProps> = () => {
     <div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-10 gap-y-[30px]">
         {activeNews.map((activeNew) => {
-          return <New _new={activeNew} />;
+          return <New _new={activeNew} key={activeNew.objectID} />;
         })}
       </div>
 

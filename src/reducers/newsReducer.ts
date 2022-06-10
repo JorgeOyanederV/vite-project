@@ -2,9 +2,9 @@ import { types } from "../types/types";
 
 const initialState = {
   news: [],
-  faves: [],
-  selectedNews: 'all',
-  sourceNews: ''
+  faves: JSON.parse(localStorage.getItem('faves')) || [],
+  selectedNews: localStorage.getItem('active') || 'all',
+  sourceNews: localStorage.getItem('source') || ''
 };
 
 interface newsReducerProps {

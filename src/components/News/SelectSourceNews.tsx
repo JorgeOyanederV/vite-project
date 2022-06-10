@@ -1,17 +1,18 @@
-import { FC } from "react";
-import { useDispatch } from "react-redux";
+import { FC, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { getAllNews, setSourceNews } from "../../actions/news";
 
 interface SelectSourceNewsProps {}
 
 const SelectSourceNews: FC<SelectSourceNewsProps> = () => {
   const dispatch = useDispatch();
-
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const source = event.target.value;
+    localStorage.setItem("source", source);
     dispatch(setSourceNews(source));
     dispatch(getAllNews(source));
   };
+
   return (
     //   idk how to minimize the className for better view.....
     <div className="w-[240px] h-[32px] mb-[38px]">

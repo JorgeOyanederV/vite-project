@@ -12,30 +12,35 @@ interface NewProps {
     story_url: string;
     created_at: string;
     isFave: boolean;
+    objectID: number;
   };
 }
 
 // the rectangle element in the list of the news
 export const New: FC<NewProps> = ({ _new }) => {
-  const { author, story_title, story_url, created_at, isFave } = _new;
-  const [isFaveState, setIsFaveState] = useState(isFave);
+  const [_newState, set_newState] = useState(_new);
+  const { author, story_title, story_url, created_at, isFave } = _newState;
   const dispatch = useDispatch();
 
   const hoursTranscurred =
-    new Date(created_at).getHours() - new Date().getHours();
+    new Date().getHours() - new Date(created_at).getHours();
 
   const makeFave = () => {
-    setIsFaveState(!isFaveState);
-    if (isFaveState) {
-      dispatch(removeNewFave(_new));
+    if (isFave) {
+      dispatch(removeNewFave(_new.objectID));
     } else {
       dispatch(addNewFave(_new));
     }
+    set_newState({
+      ..._newState,
+      isFave: !isFave,
+    });
   };
+
   return (
     <div className="w-full md:h-[90px] pl-[26px] flex border border-[#979797] rounded-[6px] ">
       {/* When click on this redirect to the main new post */}
-      <div className="flex-1 flex flex-col justify-center">
+      <div className="flex-1 flex flex-col justify-center py-2">
         <div className="flex flex-row gap-[8px] items-start">
           <img src={clock} alt="clock" />
           <p className="text-[11px]">
@@ -52,7 +57,7 @@ export const New: FC<NewProps> = ({ _new }) => {
       >
         <div className="absolute h-full w-full bg-[#606060] opacity-[0.06]"></div>
         <div className="static h-full flex justify-center items-center">
-          {isFaveState ? (
+          {isFave ? (
             <img src={heart} alt="heart-full" className="w-[24px] h-[24px]" />
           ) : (
             <img
