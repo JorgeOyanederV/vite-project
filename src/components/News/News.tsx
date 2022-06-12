@@ -3,10 +3,9 @@ import { useSelector } from "react-redux";
 import NewsList from "./NewsList";
 import SelectNews from "./SelectNews";
 import SelectSourceNews from "./SelectSourceNews";
-interface NewsProps {}
 
 // component that render a selector and list of news with pagination
-export const News: FC<NewsProps> = () => {
+export const News: FC = () => {
   const { selectedNews, faves } = useSelector((state) => state.news);
 
   useEffect(() => {

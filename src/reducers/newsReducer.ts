@@ -2,13 +2,10 @@ import { types } from "../types/types";
 
 const initialState = {
   news: [],
-  faves: JSON.parse(localStorage.getItem('faves')) || [],
+  faves: JSON.parse(localStorage.getItem("faves")) || [],
   selectedNews: localStorage.getItem('active') || 'all',
   sourceNews: localStorage.getItem('source') || ''
 };
-
-interface newsReducerProps {
-}
 
 export const newsReducer = (state = initialState, action: any) => {
   switch (action.type) {

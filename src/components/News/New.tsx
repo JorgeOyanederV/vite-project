@@ -5,19 +5,8 @@ import heart_hole from "../../assets/iconmonstr-favorite-2.png";
 import { useDispatch } from "react-redux";
 import { addNewFave, removeNewFave } from "../../actions/news";
 
-interface NewProps {
-  _new: {
-    author: string;
-    story_title: string;
-    story_url: string;
-    created_at: string;
-    isFave: boolean;
-    objectID: number;
-  };
-}
-
 // the rectangle element in the list of the news
-export const New: FC<NewProps> = ({ _new }) => {
+export const New: FC = ({ _new }) => {
   const [_newState, set_newState] = useState(_new);
   const { author, story_title, story_url, created_at, isFave } = _newState;
   const dispatch = useDispatch();

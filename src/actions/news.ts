@@ -1,15 +1,5 @@
+import { New, NewFave } from "../types";
 import { types } from "../types/types"
-
-interface New {
-   author: String,
-   story_title: String,
-   story_url: String,
-   created_at: String,
-   objectID: number
-}
-interface NewFave extends New {
-   isFave: boolean
-}
 
 export const getAllNews = (source: String) => {
    return async (dispatch, getState) => {
@@ -17,7 +7,7 @@ export const getAllNews = (source: String) => {
       const URL = `https://hn.algolia.com/api/v1/search_by_date?query=${source}&page=0`
       const { hits: news } = await fetch(URL)
          .then(res => res.json());
-      const filteredNews = await news.filter(({ author, story_title, story_url, created_at }) =>
+      const filteredNews = await news.filter(({ author, story_title, story_url, created_at }: New) =>
          (author !== null && story_title !== null && story_url !== null && created_at !== null));
       const newsFormated = await filteredNews.map((item: New) => ({ ...item, isFave: isFaves(item.objectID, getState) }));
       dispatch(setAllNews(newsFormated))

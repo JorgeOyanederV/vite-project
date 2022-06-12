@@ -2,9 +2,7 @@ import { FC, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setActiveNews } from "../../actions/news";
 
-interface SelectNewsProps {}
-
-const SelectNews: FC<SelectNewsProps> = () => {
+const SelectNews: FC = () => {
   const [active, setActive] = useState("all");
   const dispatch = useDispatch();
 
